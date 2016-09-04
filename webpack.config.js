@@ -2,8 +2,15 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    entry: './index.js',
-    output: { path: path.join(__dirname, 'build'), filename: 'bundle.js' },
+    entry: [
+       
+        './index.js'
+    ],
+    output: { 
+        path: path.join(__dirname, 'dist'),
+        filename: 'bundle.js',
+        publicPath: '/static/' 
+    },
     module: {
         loaders: [
             {
@@ -24,13 +31,12 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         hot: true,
-        progress: true,
         colors: true,
         stats: 'errors-only',
         host: 'localhost',
         port: 8080,
         open: true,
-        outputPath: path.join(__dirname, 'build')
+        outputPath: path.join(__dirname, 'static')
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin()
