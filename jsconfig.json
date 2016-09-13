@@ -1,0 +1,20 @@
+{
+	// Документацию о формате jsconfig.json см. в статье https://go.microsoft.com/fwlink/?LinkId=759670
+	//
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+        "jsx": "react",
+		"allowSyntheticDefaultImports": true
+	},
+    "files": [
+        "D:/Web/redux-tutorial/node_modules/react/lib/React.js"
+    ],
+	"exclude": [
+		"bower_components",
+		"jspm_packages",
+        "dist",
+		"tmp",
+		"temp"
+	]
+}
