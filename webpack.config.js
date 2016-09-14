@@ -2,11 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'cheap-module-eval-source-map',
   entry: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
     './src/index'
   ],
   output: {
@@ -26,7 +23,7 @@ module.exports = {
     }]
   },
   devServer: {
-    stats: "minimum",
+    stats: "errors-only",
     open: true,
     historyApiFallback: true
   },
