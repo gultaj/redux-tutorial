@@ -7,10 +7,8 @@
         "jsx": "react",
 		"allowSyntheticDefaultImports": true
 	},
-    "files": [
-        "D:/Web/redux-tutorial/node_modules/react/lib/React.js"
-    ],
 	"exclude": [
+		"node_modules",
 		"bower_components",
 		"jspm_packages",
         "dist",
