@@ -17,7 +17,7 @@ module.exports = {
       loader: 'babel',
       query: {
         "presets": ["es2015", "stage-0", "react"],
-        "plugins": ["react-hot-loader/babel"]
+        "plugins": ["react-hot-loader/babel", "transform-decorators-legacy"]
       },
       include: path.join(__dirname, 'src')
     }]
