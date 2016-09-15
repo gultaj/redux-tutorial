@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { actionToggleTodo } from '../actions';
-import { getVisibilityTodos }  from '../utils';
+import { getVisibilityTodos }  from '../utils/functions';
 import React, { Component } from 'react';
 
 const Todo = ({onClick, completed, text}) => (
@@ -25,7 +25,7 @@ export default class TodoList extends Component {
 		const {todos, onTodoClick} = this.props;
 		return (
 			<ul className='todo-list'>
-				{todos.map((todo, i) => <Todo key={i} onClick={() => onTodoClick(todo.id)} {...todo} />)}
+				{todos.map(todo => <Todo key={todo.id} onClick={() => onTodoClick(todo.id)} {...todo} />)}
 			</ul>
 		);
 	}
