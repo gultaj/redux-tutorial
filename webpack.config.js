@@ -23,7 +23,7 @@ module.exports = {
     }]
   },
   devServer: {
-    stats: "errors-only",
+    stats: "minimum",
     open: true,
     historyApiFallback: true
   },

@@ -138,7 +138,6 @@ const VisibleTodoList = connect(
 
 const todoApp = combineReducers({todos, visibilityFilter});
 const store = createStore(todoApp, initialState);
-console.log(store.getState());
 
 render(
 	<Provider store={store}>
