@@ -6,3 +6,8 @@
 	text-decoration: line-through;
 	color: gray;
 }
+
+.active {
+	text-decoration: none;
+	color: lightcoral;
+}

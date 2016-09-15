@@ -11,8 +11,8 @@ const Todo = ({onClick, completed, text}) => (
 );
 
 @connect(
-	state => ({
-		todos: getVisibilityTodos(state.todos, state.visibilityFilter)
+	(state, ownProps) => ({
+		todos: getVisibilityTodos(state.todos, ownProps.filter)
 	}),
 	dispatch => ({
 		onTodoClick(id) {
