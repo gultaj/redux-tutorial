@@ -1,4 +1,4 @@
-export const getVisibilityTodos = (todos, filter) => {
+export const getVisibilityTodos = ({todos}, filter) => {
 	switch(filter) {
 		case 'all': return todos;
 		case 'active' : return todos.filter(todo => !todo.completed);

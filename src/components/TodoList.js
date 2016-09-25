@@ -12,13 +12,9 @@ const Todo = ({onClick, completed, text}) => (
 
 @connect(
 	(state, ownProps) => ({
-		todos: getVisibilityTodos(state.todos, ownProps.filter)
+		todos: getVisibilityTodos(state, ownProps.filter)
 	}),
-	dispatch => ({
-		onTodoClick(id) {
-			dispatch(actionToggleTodo(id))
-		}
-	})
+	{onTodoClick: actionToggleTodo}
 )
 export default class TodoList extends Component {
 	render() {
