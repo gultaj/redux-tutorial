@@ -1,5 +1,7 @@
+import { combineReducers } from 'redux';
+
 const todo = (state, action) => {
-	switch(action.type) {
+	switch (action.type) {
 		case 'ADD_TODO': return {
 			id: action.id,
 			text: action.text,
@@ -7,15 +9,28 @@ const todo = (state, action) => {
 		};
 		case 'TOGGLE_TODO':
 			if (state.id !== action.id) return state;
-			return { ...state, completed: !state.completed};
+			return {...state, completed: !state.completed};
 	}
 };
-const todos = (state = [], action) => {
-	switch(action.type) {
-		case 'ADD_TODO': return [...state, todo(undefined, action)];
-		case 'TOGGLE_TODO': return state.map(t => todo(t, action));
-		default: return state;
-	};
+
+const byId = (state = {}, action) => {
+	switch (action.type) {
+		case 'ADD_TODO':
+		case 'TOGGLE_TODO':
+			return {...state, [action.id]: todo(state[action.id], action)};
+		default:
+			return state;
+	}
 };
 
-export default todos;
+const allIds = (state = [], action) => {
+	switch (action.type) {
+		case 'ADD_TODO': return [...state, action.id];
+		default: return state;
+	}
+};
+
+export const todos = combineReducers({
+	byId,
+	allIds
+});

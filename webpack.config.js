@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   entry: [
     './src/index'
   ],
@@ -17,7 +17,7 @@ module.exports = {
       loader: 'babel',
       query: {
         "presets": ["es2015", "stage-0", "react"],
-        "plugins": ["react-hot-loader/babel", "transform-decorators-legacy"]
+        "plugins": ["react-hot-loader/babel", "transform-decorators-legacy", "babel-plugin-transform-object-rest-spread"]
       },
       include: path.join(__dirname, 'src')
     }]

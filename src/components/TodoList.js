@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 
 const Todo = ({onClick, completed, text}) => (
 	<li className={completed ? 'todo-completed' : ''}
-		data-id={1} 
+		data-id={1}
 		onClick={onClick}>{text}
 	</li>
 );
@@ -14,14 +14,14 @@ const Todo = ({onClick, completed, text}) => (
 	(state, ownProps) => ({
 		todos: getVisibilityTodos(state, ownProps.filter)
 	}),
-	{onTodoClick: actionToggleTodo}
+	{ onTodoClick: actionToggleTodo }
 )
 export default class TodoList extends Component {
 	render() {
 		const {todos, onTodoClick} = this.props;
 		return (
 			<ul className='todo-list'>
-				{todos.map(todo => <Todo key={todo.id} onClick={() => onTodoClick(todo.id)} {...todo} />)}
+				{todos.map(todo => <Todo key={todo.id} onClick={() => onTodoClick(todo.id) } {...todo} />) }
 			</ul>
 		);
 	}
