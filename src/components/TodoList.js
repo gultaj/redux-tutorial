@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { actionToggleTodo } from '../actions';
 import { getVisibilityTodos }  from '../utils/functions';
 import React, { Component } from 'react';
+import { fetchTodos } from '../api/index';
 
 const Todo = ({onClick, completed, text}) => (
 	<li className={completed ? 'todo-completed' : ''}
@@ -11,12 +12,27 @@ const Todo = ({onClick, completed, text}) => (
 );
 
 @connect(
-	(state, ownProps) => ({
-		todos: getVisibilityTodos(state, ownProps.filter)
+	(state, {filter}) => ({
+		todos: getVisibilityTodos(state, filter),
+		filter
 	}),
 	{ onTodoClick: actionToggleTodo }
 )
 export default class TodoList extends Component {
+	componentDidMount() {
+		const { filter } = this.props;
+		fetchTodos(filter).then(todos => 
+			console.log(filter, todos)
+		);
+	}
+	componentDidUpdate(prevProps) {
+		const { filter } = this.props;
+		if (filter !== prevProps.filter) {
+			fetchTodos(filter).then(todos => 
+				console.log(filter, todos)
+			);
+		}
+	}
 	render() {
 		const {todos, onTodoClick} = this.props;
 		return (

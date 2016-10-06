@@ -1,5 +1,4 @@
 import todoApp from './reducers/';
-import { loadState, saveState } from './utils/localStorage';
 import { createStore } from 'redux';
 
 const addLoggingToDispatch = (store) => {
@@ -17,19 +16,11 @@ const addLoggingToDispatch = (store) => {
 };
 
 const configureStore = () => {
-    const initialState = loadState();
-
-    const store = createStore(todoApp, initialState);
+    const store = createStore(todoApp);
     
     if (process.env.NODE_ENV !== 'production') { 
         store.dispatch = addLoggingToDispatch(store);
     }
-
-    store.subscribe(() => {
-        saveState({
-            todos: store.getState().todos
-        });
-    });
     return store;
 };
 
