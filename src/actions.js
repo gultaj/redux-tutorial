@@ -6,7 +6,13 @@ export const actionAddTodo = (text) => ({
     text
 });
 
-export const actionToggleTodo = (id) => ({
+export const toggleTodo = (id) => ({
     type: 'TOGGLE_TODO',
     id
+});
+
+export const receiveTodos = (filter, response) => ({
+    type: 'RECEIVE_TODOS',
+    filter,
+    response
 });

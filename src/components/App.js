@@ -7,7 +7,7 @@ const App = ({ params }) => (
 	<div>
 		<h1>To-Do</h1>
 		<AddTodo />
-		<VisibleTodoList filter={params.filter || 'all'} />
+		<VisibleTodoList filter={params.filter} />
 		<Footer />
 	</div>
 );

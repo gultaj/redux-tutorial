@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actionToggleTodo } from '../actions';
+import * as actions from '../actions';
 import { getVisibilityTodos }  from '../utils/functions';
 import React, { Component } from 'react';
 import { fetchTodos } from '../api/index';
@@ -12,32 +12,32 @@ const Todo = ({onClick, completed, text}) => (
 );
 
 @connect(
-	(state, {filter}) => ({
+	(state, {filter = 'all'}) => ({
 		todos: getVisibilityTodos(state, filter),
 		filter
 	}),
-	{ onTodoClick: actionToggleTodo }
+	actions
 )
 export default class TodoList extends Component {
-	componentDidMount() {
-		const { filter } = this.props;
+	fetchData() {
+		const { filter, receiveTodos } = this.props;
 		fetchTodos(filter).then(todos => 
-			console.log(filter, todos)
+			receiveTodos(filter, todos)
 		);
 	}
+	componentDidMount() {
+		this.fetchData();
+	}
 	componentDidUpdate(prevProps) {
-		const { filter } = this.props;
-		if (filter !== prevProps.filter) {
-			fetchTodos(filter).then(todos => 
-				console.log(filter, todos)
-			);
+		if (this.props.filter !== prevProps.filter) {
+			this.fetchData();
 		}
 	}
 	render() {
-		const {todos, onTodoClick} = this.props;
+		const {todos, toggleTodo} = this.props;
 		return (
 			<ul className='todo-list'>
-				{todos.map(todo => <Todo key={todo.id} onClick={() => onTodoClick(todo.id) } {...todo} />) }
+				{todos.map(todo => <Todo key={todo.id} onClick={() => toggleTodo(todo.id) } {...todo} />) }
 			</ul>
 		);
 	}
