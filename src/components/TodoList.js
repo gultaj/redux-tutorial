@@ -12,7 +12,7 @@ const Todo = ({onClick, completed, text}) => (
 
 @connect(
 	(state, {filter = 'all'}) => ({
-		todos: getVisibilityTodos(state, filter),
+		todos: getVisibilityTodos(state.todos, filter),
 		filter
 	}),
 	actions
