@@ -1,27 +1,15 @@
 import todoApp from './reducers/';
-import { createStore } from 'redux';
-
-const addLoggingToDispatch = (store) => {
-    const rawDispatch = store.dispatch;
-    return (action) => {
-       
-        console.group(action.type);
-        console.log('%c prev state', 'color: gray', store.getState());
-        console.log('%c action', 'color: blue', action);
-        const returnValue = rawDispatch(action);
-        console.log('%c next state', 'color: green', store.getState());
-        console.groupEnd(action.type);
-        return returnValue;
-    }
-};
+import { createStore, applyMiddleware } from 'redux';
+import promise from 'redux-promise';
+import createLogger from 'redux-logger';
 
 const configureStore = () => {
-    const store = createStore(todoApp);
-    
-    if (process.env.NODE_ENV !== 'production') { 
-        store.dispatch = addLoggingToDispatch(store);
+    const middlewares = [promise];
+
+    if (process.env.NODE_ENV !== 'production') {
+        middlewares.push(createLogger());
     }
-    return store;
+    return createStore(todoApp, applyMiddleware(...middlewares));
 };
 
 export default configureStore;

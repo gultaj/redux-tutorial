@@ -6,10 +6,6 @@ import { fetchTodos } from './api/index';
 
 if (module.hot) module.hot.accept();
 
-// fetchTodos('all').then(todos => {
-// 	console.log(todos);
-// });
-
 const store = configureStore();
 
 render(

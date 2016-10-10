@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { getVisibilityTodos }  from '../utils/functions';
 import React, { Component } from 'react';
-import { fetchTodos } from '../api/index';
 
 const Todo = ({onClick, completed, text}) => (
 	<li className={completed ? 'todo-completed' : ''}
@@ -20,10 +19,8 @@ const Todo = ({onClick, completed, text}) => (
 )
 export default class TodoList extends Component {
 	fetchData() {
-		const { filter, receiveTodos } = this.props;
-		fetchTodos(filter).then(todos => 
-			receiveTodos(filter, todos)
-		);
+		const { filter, fetchTodos } = this.props;
+		fetchTodos(filter);
 	}
 	componentDidMount() {
 		this.fetchData();
@@ -34,10 +31,10 @@ export default class TodoList extends Component {
 		}
 	}
 	render() {
-		const {todos, toggleTodo} = this.props;
+		const {todos, actions} = this.props;
 		return (
 			<ul className='todo-list'>
-				{todos.map(todo => <Todo key={todo.id} onClick={() => toggleTodo(todo.id) } {...todo} />) }
+				{todos.map(todo => <Todo key={todo.id} onClick={() => actions.toggleTodo(todo.id) } {...todo} />) }
 			</ul>
 		);
 	}
