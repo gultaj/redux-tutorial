@@ -1,5 +1,6 @@
+import { getById, getIds } from '../reducers';
 
 export const getVisibilityTodos = (state, filter) => {
-	const ids = state.idsByFilter[filter];
-	return ids.map(id => state.byId[id]);
+	const ids = getIds(state.listByFilter[filter]);
+	return ids.map(id => getById(state.byId, id));
 };

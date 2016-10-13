@@ -12,7 +12,7 @@ const Todo = ({onClick, completed, text}) => (
 
 @connect(
 	(state, {filter = 'all'}) => ({
-		todos: getVisibilityTodos(state.todos, filter),
+		todos: getVisibilityTodos(state, filter),
 		filter
 	}),
 	actions
@@ -31,10 +31,10 @@ export default class TodoList extends Component {
 		}
 	}
 	render() {
-		const {todos, actions} = this.props;
+		const {todos, toggleTodo} = this.props;
 		return (
 			<ul className='todo-list'>
-				{todos.map(todo => <Todo key={todo.id} onClick={() => actions.toggleTodo(todo.id) } {...todo} />) }
+				{todos.map(todo => <Todo key={todo.id} onClick={() => toggleTodo(todo.id) } {...todo} />) }
 			</ul>
 		);
 	}
