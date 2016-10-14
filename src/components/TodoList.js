@@ -20,8 +20,7 @@ const Todo = ({onClick, completed, text}) => (
 )
 export default class TodoList extends Component {
 	fetchData() {
-		const { filter, requestTodos, fetchTodos } = this.props;
-		requestTodos(filter);
+		const { filter, fetchTodos } = this.props;
 		fetchTodos(filter);
 	}
 	componentDidMount() {
