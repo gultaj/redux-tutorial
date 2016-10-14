@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { getVisibilityTodos }  from '../utils/functions';
+import { getVisibilityTodos, getIsFetching }  from '../utils/functions';
 import React, { Component } from 'react';
 
 const Todo = ({onClick, completed, text}) => (
@@ -13,13 +13,15 @@ const Todo = ({onClick, completed, text}) => (
 @connect(
 	(state, {filter = 'all'}) => ({
 		todos: getVisibilityTodos(state, filter),
+		isFetching: getIsFetching(state, filter),
 		filter
 	}),
 	actions
 )
 export default class TodoList extends Component {
 	fetchData() {
-		const { filter, fetchTodos } = this.props;
+		const { filter, requestTodos, fetchTodos } = this.props;
+		requestTodos(filter);
 		fetchTodos(filter);
 	}
 	componentDidMount() {
@@ -31,7 +33,10 @@ export default class TodoList extends Component {
 		}
 	}
 	render() {
-		const {todos, toggleTodo} = this.props;
+		const {todos, toggleTodo, isFetching} = this.props;
+		if (isFetching && !todos.length) {
+			return <p>Loading...</p>;
+		}
 		return (
 			<ul className='todo-list'>
 				{todos.map(todo => <Todo key={todo.id} onClick={() => toggleTodo(todo.id) } {...todo} />) }

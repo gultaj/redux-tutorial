@@ -21,3 +21,8 @@ const receiveTodos = (filter, response) => ({
     filter,
     response
 });
+
+export const requestTodos = (filter) => ({
+    type: 'REQUEST_TODOS',
+    filter
+});
