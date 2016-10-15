@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actionAddTodo } from '../actions';
+import { addTodo } from '../actions';
 import React, { Component } from 'react';
 
 @connect()
@@ -8,7 +8,7 @@ export default class AddTodo extends Component {
 		const { dispatch } = this.props;
 		const text = this.refs.text.value.trim();
 		if (text.length) {
-			dispatch(actionAddTodo(text));
+			dispatch(addTodo(text));
 		}
 		this.refs.text.value = '';
 	}
