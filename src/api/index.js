@@ -18,7 +18,10 @@ const fakeDatabase = {
 };
 
 export const fetchTodos = (filter) => {
-    return delay(5000).then(() => {
+    return delay(500).then(() => {
+        if (Math.random() > 0.5) {
+            throw new Error('Boom!');
+        }
         switch (filter) {
             case 'all': return fakeDatabase.todos;
             case 'active' : return fakeDatabase.todos.filter(todo => !todo.completed);

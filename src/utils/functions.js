@@ -7,3 +7,6 @@ export const getVisibilityTodos = (state, filter) => {
 
 export const getIsFetching = (state, filter) => 
 	helpers.getIsFetching(state.listByFilter[filter]);
+
+export const getErrorMessage = (state, filter) => 
+	helpers.getErrorMessage(state.listByFilter[filter]);

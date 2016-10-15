@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { getVisibilityTodos, getIsFetching }  from '../utils/functions';
+import { getVisibilityTodos, getIsFetching, getErrorMessage }  from '../utils/functions';
 import React, { Component } from 'react';
+import FetchError from './FetchError';
 
 const Todo = ({onClick, completed, text}) => (
 	<li className={completed ? 'todo-completed' : ''}
@@ -13,6 +14,7 @@ const Todo = ({onClick, completed, text}) => (
 @connect(
 	(state, {filter = 'all'}) => ({
 		todos: getVisibilityTodos(state, filter),
+		errorMessage: getErrorMessage(state, filter),
 		isFetching: getIsFetching(state, filter),
 		filter
 	}),
@@ -32,9 +34,14 @@ export default class TodoList extends Component {
 		}
 	}
 	render() {
-		const {todos, toggleTodo, isFetching} = this.props;
+		const {todos, errorMessage, toggleTodo, isFetching} = this.props;
 		if (isFetching && !todos.length) {
 			return <p>Loading...</p>;
+		}
+		if (errorMessage && !todos.length) {
+			return (
+				<FetchError onRetry={::this.fetchData} message={errorMessage} />
+			)
 		}
 		return (
 			<ul className='todo-list'>
